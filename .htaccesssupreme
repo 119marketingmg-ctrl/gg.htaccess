@@ -1,0 +1,53 @@
+# ===== Basic protections =====
+Options -Indexes
+# Deny sensitive files
+<FilesMatch "^(?:\.env|wp-config\.php|\.git|composer\.(json|lock)|readme\.html|license\.txt)$">
+  Require all denied
+</FilesMatch>
+<Files ".htaccess">
+  Require all denied
+</Files>
+# Block risky HTTP methods
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_METHOD} ^(PUT|DELETE|TRACE|TRACK) [NC]
+  RewriteRule .* - [F]
+</IfModule>
+# Prevent direct access to xmlrpc (if unused)
+<Files "xmlrpc.php">
+  Require all denied
+</Files>
+# WordPress standard rules (if WP site)
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW IPDENYID:DsLhnZylQR
+deny from 182.0.242.67
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE DsLhnZylQR:IPDENYID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW IPDENYID:ufXPirPOHV
+deny from 66.249.79.33
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE ufXPirPOHV:IPDENYID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW IPDENYID:FV0Oj8C0yV
+deny from 207.46.13.155
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE FV0Oj8C0yV:IPDENYID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW IPDENYID:fk2qQjq8qX
+deny from 207.46.13.168
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE fk2qQjq8qX:IPDENYID
+
+
+# DO NOT REMOVE THIS LINE AND THE LINES BELOW IPDENYID:dAb7I9H64L
+deny from 82.145.208.120
+# DO NOT REMOVE THIS LINE AND THE LINES ABOVE dAb7I9H64L:IPDENYID
